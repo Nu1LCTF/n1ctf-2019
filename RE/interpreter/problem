@@ -1,0 +1,16 @@
+service problem
+{
+  disable = no
+  socket_type = stream
+  protocol    = tcp
+  wait        = no
+  user        = root
+  bind        = 0.0.0.0
+  server      = /challenge/run.sh
+  type        = UNLISTED
+  flags       = REUSE
+  port        = 9999
+  nice        = 5
+  per_source  = 10
+  rlimit_as   = 512M
+}

@@ -1,0 +1,9 @@
+version: '3'
+services:
+  chal:
+    build: .
+    volumes:
+      - /files:/workdir:rw
+    ports:
+      - "9999:9999"
+
