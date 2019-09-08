@@ -1,0 +1,21 @@
+cabal-version:       2.4
+name:                server
+version:             0.1.0.0
+description:         Some random challenge
+license:             BSD-3-Clause
+license-file:        LICENSE
+author:              shiki7
+maintainer:          i@shiki7.me
+
+executable server
+  main-is:             Main.hs
+  other-modules:       GetFlag
+  build-depends:       base ^>=4.12.0.0
+                     , ghc == 8.6.5
+                     , ghc-boot == 8.6.5
+                     , ghc-paths
+                     , mtl
+                     , haskeline
+  hs-source-dirs:      src
+  ghc-options:         -O3
+  default-language:    Haskell2010
