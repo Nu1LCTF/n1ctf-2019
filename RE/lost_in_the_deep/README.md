@@ -282,7 +282,7 @@ for i in sol[root][m]:
 	tot_w_ += w[i]
 print 'v: %d w: %d'%(tot_v_, tot_w_)
 ```
-Encrypt the result `[0, 1, 3, 5, 10, 11, 16, 25, 26, 28, 31, 32, 35, 52, 56, 59, 76, 91, 97]` to get the flag.
+Encode the result `[0, 1, 3, 5, 10, 11, 16, 25, 26, 28, 31, 32, 35, 52, 56, 59, 76, 91, 97]` to get the flag.
 ### Solution 2
 There is also a `race condition` in server's logic.
 There's no concurrency lock in `check` function, and nodes' flag are modified inside it.
