@@ -8,6 +8,42 @@ You can also solve this challenge without recovering function names, but maybe a
 
 ## Part 1
 
+### Function name recovering
+[This article](https://rednaga.io/2016/09/21/reversing_go_binaries_like_a_pro/) introduces how to recover symbol in go ELF binary.
+
+And the different between ELF and PE is that some segments like `.gopclntab` is merged into `.rdata`, so the script can't work directly but we can still find it manully. You can compare an ELF file to a PE file to find the difference.
+I wrote a simple one for this challenge:
+```python
+import re
+st = 0x54e870 # manully find out the boundary
+ed = 0x5e0900
+func_st = 0x401000
+func_ed = 0x4e0000
+func_addr = -1
+lst_func = -1
+func_name = ''
+func_list = []
+while st < ed:
+    if func_addr == -1:
+        x = get_qword(st)
+        if x > func_st and x < func_ed:
+            func_addr = x
+            lst_func = st
+    else:
+        d = st - lst_func
+        if d > 0x50:
+            s = get_strlit_contents(st)
+            if s != None and len(s) > 4 and '.' in s:
+                s = re.sub('[^a-zA-Z0-9]', '_', s)
+                succ = add_func(func_addr)
+                print 'make function %s at 0x%x : %d' % (s, func_addr, succ)
+                if not s in func_list:
+                    idc.MakeName(func_addr, s)
+                func_list.append(s)
+                func_addr = -1
+    st += 8
+```
+It's ugly but works. 
 ### main function
 After recovering the function names, we are able to find `main_main` function. 
 First, `argc` is checked to decide whether to run server or client, the result value of client function will be printed out.
