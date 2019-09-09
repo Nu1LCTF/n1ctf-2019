@@ -1,0 +1,8 @@
+version: '3'
+services:
+  chal:
+    build: .
+    ports:
+      - "9998:9998"
+
+
