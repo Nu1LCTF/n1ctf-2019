@@ -1,3 +1,5 @@
+[中文](./README.md) [English](./EN_writeup.md)
+
 ### 前言
 准备了好久的N1CTF终于结束了，师傅们都在很用心的出题和运维，然而还是出了不少事故，希望大佬们体谅一下orz!
 膜@wonderkun师傅的非预期链（感觉大佬们都不想做我这道题，可能出的太烂了。）
@@ -27,7 +29,7 @@ secure_file_priv=""
 但其实还受限于`open_basedir`
 ![image.png](./img/2.png)
 这其实也就是用`Rogue Mysql Server`只能读到`/tmp/`目录下文件的原因。
-另外mysql用户还需要拥有`insert`权限，否则会执行报错，因此在题目中直接直接执行`LOAD DATA LOCAL INFILE`去触发phar反序列化是不行的。
+另外mysql用户还需要拥有`insert`权限，否则会执行报错，因此在题目中直接执行`LOAD DATA LOCAL INFILE`去触发phar反序列化是不行的。
 
 @LoRexxar'师傅在今年的Tsec上分享的议题[https://paper.seebug.org/998/](https://paper.seebug.org/998/)中提到了mysql客户端任意文件读取可以配合上面的trick来进行phar反序列化。因为其原理就是当`Mysql Client`向`Rogue Mysql Server`发送任意查询语句时，`Rogue Mysql Server`可以回复一个包含想要读取文件名的`file-transfer`请求，让`Mysql Client`执行`LOAD DATA LOCAL INFILE`语句把文件读取出来并发送给`Rogue Mysql Server`。此时我们把文件名格式改为`phar://filename`，让其执行`LOAD DATA LOCAL INFILE`语句即可触发phar反序列化。
 
