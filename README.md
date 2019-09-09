@@ -1,3 +1,7 @@
 # N1CTF-2019
 
-## Mabye N1CTF-2020
+Challenges and writeups will be gradually uploaded here, stay frosty.
+
+## Maybe N1CTF-2020
+
+Until next time, peace.
