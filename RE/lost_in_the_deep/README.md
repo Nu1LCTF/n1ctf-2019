@@ -285,7 +285,7 @@ print 'v: %d w: %d'%(tot_v_, tot_w_)
 Encode the result `[0, 1, 3, 5, 10, 11, 16, 25, 26, 28, 31, 32, 35, 52, 56, 59, 76, 91, 97]` to get the flag.
 ### Solution 2
 There is also a `race condition` in server's logic.
-There's no concurrency lock in `check` function, and nodes' flag are modified inside it.
+There's no concurrent lock in `check` function, and nodes' flag are modified inside it.
 There is also a long time interval between flags are cleaned and flags are checked when decrypting the base64 table with 1024 rounds RC4, which makes race condition easy to exploit.
 So we want to find a timing that **in one connection**, we choose an node to make its flag true and then **in another connection** we choose its child so that we don't need to choose itself to bypass the father check.
 Examine the tree, we can find node93 has a big weight and its children has huge values.
