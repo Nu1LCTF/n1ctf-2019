@@ -43,7 +43,7 @@ while st < ed:
                 func_addr = -1
     st += 8
 ```
-It's ugly but works. 
+It's ugly but works. You may need to disassemble the codes before you use this.
 ### main function
 After recovering the function names, we are able to find `main_main` function. 
 First, `argc` is checked to decide whether to run server or client, the result value of client function will be printed out.
