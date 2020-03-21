@@ -1,6 +1,6 @@
 ## Preparation
 
-Before you build/start the docker, you should change the external MySQL server connection keywords in `frontend/update_rand.py` and `index.php`.
+Before you build/start the docker, you should change external MySQL server connection keywords in `frontend/update_rand.py` and `index.php`.
 
 ## Get Start
 
