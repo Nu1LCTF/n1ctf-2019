@@ -1,0 +1,48 @@
+version: '2'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "0.0.0.0:5000:5000"
+    mem_limit: 300M
+    restart: always
+    networks:
+      internal_network:
+        ipv4_address: 10.0.20.10
+      out_network:
+        ipv4_address: 10.0.30.10
+  frontend_show_data:
+    build: ./frontend_show_data
+    ports:
+      - "0.0.0.0:80:80"
+    restart: always
+    networks:
+      internal_network:
+        ipv4_address: 10.0.20.12
+      out_network:
+        ipv4_address: 10.0.30.11
+  backend-rabbitmq:
+    build: ./backend-rabbitmq
+    restart: always
+    networks:
+      internal_network:
+        ipv4_address: 10.0.20.11
+  backend-php:
+    build: ./backend-php
+    mem_limit: 200M
+    restart: always
+    networks:
+      internal_network:
+        ipv4_address: 10.0.20.13
+networks:
+    internal_network:
+        internal: true
+        ipam:
+            driver: default
+            config:
+                - subnet: 10.0.20.0/24
+    out_network:
+        ipam:
+            driver: default
+            config:
+                - subnet: 10.0.30.0/24

